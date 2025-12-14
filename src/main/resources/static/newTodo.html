@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${isEdit ? 'Edit Todo' : 'New Todo'}">New Todo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .back-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: #667eea;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #f0f0f0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #d0d0d0;
+        }
+
+        .help-text {
+            font-size: 13px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <div class="form-header">
+        <h1 th:text="${isEdit ? '✏️ Edit Todo' : '➕ New Todo'}">New Todo</h1>
+        <a href="/todos" class="back-link">← Back to list</a>
+    </div>
+
+    <form th:action="${isEdit ? '/todos/' + todo.id + '/update' : '/todos/create'}"
+          method="post"
+          th:object="${todo}">
+
+        <!-- Title -->
+        <div class="form-group">
+            <label for="title">
+                Title <span class="required">*</span>
+            </label>
+            <input type="text"
+                   id="title"
+                   name="title"
+                   th:field="*{title}"
+                   placeholder="e.g., Buy groceries"
+                   required>
+            <div class="help-text">Give your task a clear, concise name</div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description"
+                      name="description"
+                      th:field="*{description}"
+                      placeholder="Add more details about this task..."></textarea>
+            <div class="help-text">Optional: Add any additional information</div>
+        </div>
+
+        <!-- Priority and Due Date -->
+        <div class="form-row">
+            <div class="form-group">
+                <label for="priority">Priority</label>
+                <select id="priority" name="priority" th:field="*{priority}">
+                    <option value="LOW">🟢 Low</option>
+                    <option value="MEDIUM" selected>🟡 Medium</option>
+                    <option value="HIGH">🔴 High</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="dueDate">Due Date</label>
+                <input type="date"
+                       id="dueDate"
+                       name="dueDate"
+                       th:field="*{dueDate}">
+                <div class="help-text">Optional</div>
+            </div>
+        </div>
+
+        <!-- Completed (only for edit) -->
+        <div class="form-group" th:if="${isEdit}">
+            <label class="checkbox-label">
+                <input type="checkbox"
+                       name="completed"
+                       th:field="*{completed}">
+                <span>Mark as completed</span>
+            </label>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <a href="/todos" class="btn btn-secondary">Cancel</a>
+            <button type="submit" class="btn btn-primary">
+                <span th:text="${isEdit ? 'Update Todo' : 'Create Todo'}">Create Todo</span>
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
