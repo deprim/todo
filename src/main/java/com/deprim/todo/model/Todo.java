@@ -3,6 +3,7 @@ package com.deprim.todo.model;
 import com.deprim.todo.utils.Priority;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Table(name = "todos")
@@ -27,7 +28,7 @@ public class Todo {
     private Priority priority;
 
     @Column(name = "due_date")
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -44,7 +45,7 @@ public class Todo {
 
     }
 
-    public Todo(String title, String description, Boolean completed, Priority priority, LocalDateTime dueDate, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Todo(String title, String description, Boolean completed, Priority priority, LocalDate dueDate, User user, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.title = title;
         this.description = description;
         this.completed = completed;
@@ -95,11 +96,11 @@ public class Todo {
         this.priority = priority;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
