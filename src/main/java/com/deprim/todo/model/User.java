@@ -14,7 +14,7 @@ public class User {
     private Long userId;
 
     @Column(name = "username")
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -29,8 +29,8 @@ public class User {
 
     }
 
-    public User(String userName, String password, String email, LocalDateTime createdAt) {
-        this.userName = userName;
+    public User(String username, String password, String email, LocalDateTime createdAt) {
+        this.username = username;
         this.password = password;
         this.email = email;
         this.createdAt = createdAt;
@@ -45,11 +45,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {
@@ -80,7 +80,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "userId=" + userId +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", createdAt=" + createdAt +
