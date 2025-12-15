@@ -273,7 +273,7 @@
         <h1>📝 My ToDo List</h1>
         <div class="user-info">
             <div>
-                <span>Welcome, <strong th:text="${user.username}">User</strong>!</span>
+                <span>Welcome, <strong th:text="${user.userName}">User</strong>!</span>
                 <div class="stats">
                     <div class="stat-item">
                         <span class="stat-number" th:text="${completedCount}">0</span>
@@ -284,7 +284,7 @@
                 </div>
             </div>
             <div style="display: flex; gap: 10px;">
-                <a href="/todos/new" class="add-todo-btn">+ Add New Todo</a>
+                <a href="/todo/new" class="add-todo-btn">+ Add New Todo</a>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
                     <button type="submit" class="logout-btn">Logout</button>
                 </form>
@@ -295,9 +295,9 @@
     <!-- Filters -->
     <div class="filters">
         <div class="filter-buttons">
-            <a href="/todos" class="filter-btn" th:classappend="${filter == null || filter == 'all'} ? 'active' : ''">All</a>
-            <a href="/todos?filter=active" class="filter-btn" th:classappend="${filter == 'active'} ? 'active' : ''">Active</a>
-            <a href="/todos?filter=completed" class="filter-btn" th:classappend="${filter == 'completed'} ? 'active' : ''">Completed</a>
+            <a href="/todo" class="filter-btn" th:classappend="${filter == null || filter == 'all'} ? 'active' : ''">All</a>
+            <a href="/todo?filter=active" class="filter-btn" th:classappend="${filter == 'active'} ? 'active' : ''">Active</a>
+            <a href="/todo?filter=completed" class="filter-btn" th:classappend="${filter == 'completed'} ? 'active' : ''">Completed</a>
         </div>
     </div>
 
@@ -307,14 +307,14 @@
         <div class="empty-state" th:if="${#lists.isEmpty(todos)}">
             <h2>No tasks yet!</h2>
             <p>Create your first todo to get started</p>
-            <a href="/todos/new" class="add-todo-btn">+ Add New Todo</a>
+            <a href="/todo/new" class="add-todo-btn">+ Add New Todo</a>
         </div>
 
         <!-- Todo Items -->
         <div class="todo-item" th:each="todo : ${todos}"
              th:classappend="${todo.completed} ? 'completed' : ''">
 
-            <form th:action="@{/todos/{id}/toggle(id=${todo.id})}" method="post" style="display: inline;">
+            <form th:action="@{/todo/{id}/toggle(id=${todo.id})}" method="post" style="display: inline;">
                 <input type="checkbox" class="todo-checkbox"
                        th:checked="${todo.completed}"
                        onchange="this.form.submit()">
@@ -335,8 +335,8 @@
             </div>
 
             <div class="todo-actions">
-                <a th:href="@{/todos/{id}/edit(id=${todo.id})}" class="btn btn-edit">Edit</a>
-                <form th:action="@{/todos/{id}/delete(id=${todo.id})}" method="post"
+                <a th:href="@{//{id}/edit(id=${todo.id})}" class="btn btn-edit">Edit</a>
+                <form th:action="@{/todo/{id}/delete(id=${todo.id})}" method="post"
                       style="display: inline;"
                       onsubmit="return confirm('Are you sure you want to delete this task?');">
                     <button type="submit" class="btn btn-delete">Delete</button>

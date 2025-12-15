@@ -160,10 +160,10 @@
 <div class="form-container">
     <div class="form-header">
         <h1 th:text="${isEdit ? '✏️ Edit Todo' : '➕ New Todo'}">New Todo</h1>
-        <a href="/todos" class="back-link">← Back to list</a>
+        <a href="/todo" class="back-link">← Back to list</a>
     </div>
 
-    <form th:action="${isEdit ? '/todos/' + todo.id + '/update' : '/todos/create'}"
+    <form th:action="${isEdit ? '/todo/' + todo.id + '/update' : '/todo/create'}"
           method="post"
           th:object="${todo}">
 
@@ -224,7 +224,7 @@
 
         <!-- Form Actions -->
         <div class="form-actions">
-            <a href="/todos" class="btn btn-secondary">Cancel</a>
+            <a href="/todo" class="btn btn-secondary">Cancel</a>
             <button type="submit" class="btn btn-primary">
                 <span th:text="${isEdit ? 'Update Todo' : 'Create Todo'}">Create Todo</span>
             </button>
