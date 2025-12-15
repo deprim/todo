@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 public class TodoDTO {
 
+    private Long id;
     private String title;
     private String description;
     private Boolean completed;
@@ -17,7 +18,13 @@ public class TodoDTO {
     private User user;
 
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;

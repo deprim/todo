@@ -273,7 +273,7 @@
         <h1>📝 My ToDo List</h1>
         <div class="user-info">
             <div>
-                <span>Welcome, <strong th:text="${user.userName}">User</strong>!</span>
+                <span>Welcome, <strong th:text="${user.username}">User</strong>!</span>
                 <div class="stats">
                     <div class="stat-item">
                         <span class="stat-number" th:text="${completedCount}">0</span>
@@ -325,13 +325,18 @@
                 <div class="todo-description" th:if="${todo.description}"
                      th:text="${todo.description}">Task Description</div>
                 <div class="todo-meta">
-                        <span class="priority-badge"
-                              th:classappend="'priority-' + ${todo.priority}"
-                              th:text="${todo.priority}">MEDIUM</span>
+                    <span class="priority-badge"
+                          th:classappend="${'priority-' + todo.priority}"
+                          th:text="${todo.priority}">
+                        MEDIUM
+                    </span>
                     <span class="due-date" th:if="${todo.dueDate}">
-                            📅 <span th:text="${#temporals.format(todo.dueDate, 'dd MMM yyyy')}">01 Jan 2024</span>
+                         <span th:text="${#temporals.format(todo.dueDate, 'dd MMM yyyy')}">
+                            01 Jan 2024
                         </span>
+                    </span>
                 </div>
+
             </div>
 
             <div class="todo-actions">
