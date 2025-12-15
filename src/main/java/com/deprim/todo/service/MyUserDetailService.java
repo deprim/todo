@@ -1,0 +1,31 @@
+package com.deprim.todo.service;
+
+import com.deprim.todo.model.MyUserDetails;
+import com.deprim.todo.model.User;
+import com.deprim.todo.reposotpry.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class MyUserDetailService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public MyUserDetailService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return new MyUserDetails(user); // we can return principal because our UserPrincipal class implements UserDetails interface
+
+    }
+}
