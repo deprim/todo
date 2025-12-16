@@ -264,11 +264,83 @@
             color: #666;
             margin-bottom: 20px;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 10vh auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content h3 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #dc3545;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="date"],
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(-20px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <!-- Header -->
     <div class="header">
         <h1>📝 My ToDo List</h1>
         <div class="user-info">
@@ -292,27 +364,27 @@
         </div>
     </div>
 
-    <!-- Filters -->
     <div class="filters">
         <div class="filter-buttons">
-            <a href="/todo" class="filter-btn" th:classappend="${filter == null || filter == 'all'} ? 'active' : ''">All</a>
-            <a href="/todo?filter=active" class="filter-btn" th:classappend="${filter == 'active'} ? 'active' : ''">Active</a>
-            <a href="/todo?filter=completed" class="filter-btn" th:classappend="${filter == 'completed'} ? 'active' : ''">Completed</a>
+            <a href="/todo" class="filter-btn"
+               th:classappend="${filter == null || filter == 'all'} ? 'active' : ''">All</a>
+            <a href="/todo?filter=active" class="filter-btn"
+               th:classappend="${filter == 'active'} ? 'active' : ''">Active</a>
+            <a href="/todo?filter=completed" class="filter-btn"
+               th:classappend="${filter == 'completed'} ? 'active' : ''">Completed</a>
         </div>
     </div>
 
-    <!-- Todo List -->
     <div class="todo-list">
-        <!-- Empty State -->
         <div class="empty-state" th:if="${#lists.isEmpty(todos)}">
             <h2>No tasks yet!</h2>
             <p>Create your first todo to get started</p>
             <a href="/todo/new" class="add-todo-btn">+ Add New Todo</a>
         </div>
 
-        <!-- Todo Items -->
-        <div class="todo-item" th:each="todo : ${todos}"
-             th:classappend="${todo.completed} ? 'completed' : ''">
+        <div th:each="todo : ${todos}"
+             class="todo-item"
+             th:classappend="${todo.completed ? 'completed' : ''}">
 
             <form th:action="@{/todo/{id}/toggle(id=${todo.id})}" method="post" style="display: inline;">
                 <input type="checkbox" class="todo-checkbox"
@@ -336,11 +408,20 @@
                         </span>
                     </span>
                 </div>
-
             </div>
 
             <div class="todo-actions">
-                <a th:href="@{//{id}/edit(id=${todo.id})}" class="btn btn-edit">Edit</a>
+                <button type="button" class="btn btn-edit"
+                        th:data-id="${todo.id}"
+                        th:data-title="${todo.title}"
+                        th:data-description="${todo.description}"
+                        th:data-priority="${todo.priority}"
+                        th:data-due-date="${todo.dueDate != null ? #temporals.format(todo.dueDate, 'yyyy-MM-dd') : ''}"
+                        th:data-completed="${todo.completed}"
+                        onclick="openEditModal(this)">
+                    Edit
+                </button>
+
                 <form th:action="@{/todo/{id}/delete(id=${todo.id})}" method="post"
                       style="display: inline;"
                       onsubmit="return confirm('Are you sure you want to delete this task?');">
@@ -350,5 +431,93 @@
         </div>
     </div>
 </div>
+
+<div id="editTodoModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h3>Edit Task</h3>
+
+        <form id="editForm" method="post">
+
+            <div class="form-group">
+                <label for="editTitle">Title</label>
+                <input type="text" id="editTitle" name="title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="editDescription">Description</label>
+                <textarea id="editDescription" name="description"></textarea>
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 20px;">
+                <div style="flex: 1;">
+                    <label for="editPriority">Priority</label>
+                    <select id="editPriority" name="priority">
+                        <option value="LOW">LOW</option>
+                        <option value="MEDIUM">MEDIUM</option>
+                        <option value="HIGH">HIGH</option>
+                    </select>
+                </div>
+                <div style="flex: 1;">
+                    <label for="editDueDate">Due Date</label>
+                    <input type="date" id="editDueDate" name="dueDate">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="editCompleted" name="completed">
+                    Completed
+                </label>
+            </div>
+
+            <button type="submit" class="add-todo-btn" style="width: 100%;">Save Changes</button>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    var modal = document.getElementById("editTodoModal");
+    var closeBtn = document.getElementsByClassName("close-btn")[0];
+    var editForm = document.getElementById("editForm");
+    var editTitle = document.getElementById("editTitle");
+    var editDescription = document.getElementById("editDescription");
+    var editPriority = document.getElementById("editPriority");
+    var editDueDate = document.getElementById("editDueDate");
+    var editCompleted = document.getElementById("editCompleted");
+
+    function openEditModal(button) {
+        var id = button.getAttribute('data-id');
+        var title = button.getAttribute('data-title');
+        var description = button.getAttribute('data-description');
+        var priority = button.getAttribute('data-priority');
+        var dueDate = button.getAttribute('data-due-date');
+        var completed = button.getAttribute('data-completed') === 'true';
+
+        editTitle.value = title;
+        editDescription.value = description && description !== 'null' ? description : '';
+        editPriority.value = priority;
+
+        editDueDate.value = dueDate && dueDate !== 'null' ? dueDate : '';
+
+        editCompleted.checked = completed;
+
+        editForm.setAttribute('action', '/todo/' + id + '/edit');
+
+        modal.style.display = "block";
+    }
+
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
 </body>
 </html>
