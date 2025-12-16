@@ -20,4 +20,8 @@ public class UserService {
     public Optional<User> findByUsername(String username){
         return userRepository.findByUsername(username);
     }
+
+    public Optional<User> findByUserId(Long id){
+        return userRepository.findByUserId(id);
+    }
 }

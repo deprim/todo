@@ -2,10 +2,10 @@ package com.deprim.todo.dto;
 
 import com.deprim.todo.model.User;
 import com.deprim.todo.utils.Priority;
-import jakarta.persistence.*;
+
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 public class TodoDTO {
 

@@ -1,7 +1,6 @@
 package com.deprim.todo.controller;
 
 import com.deprim.todo.dto.TodoDTO;
-import com.deprim.todo.dto.UserDTO;
 import com.deprim.todo.model.Todo;
 import com.deprim.todo.model.User;
 import com.deprim.todo.service.TodoService;
@@ -14,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -38,38 +36,43 @@ public class TodoController {
 
     @GetMapping
     public String index(Model model,
-                        Principal principal){
+                        Principal principal,
+                        @RequestParam(required = false) String filter) {
 
 
-        // Find all ToDo's and convert them to DTO's'
-        List<Todo> todos = todoService.findAll();
-        List<TodoDTO> todoDTOS = new ArrayList<>();
+        User currentUser = userService.findByUsername(principal.getName())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        for (Todo t : todos) {
-            TodoDTO todoDTO = todoConverter.convertToDTO(t);
-            todoDTOS.add(todoDTO);
+
+        List<Todo> todos;
+
+        if ("active".equals(filter)) {
+            todos = todoService.findAllActive(currentUser.getUserId());
+        } else if ("completed".equals(filter)) {
+            todos = todoService.findAllCompleted(currentUser.getUserId());
+        } else {
+            todos = todoService.findAll(currentUser.getUserId());
         }
 
-        // Who am I? Find a user that logged in.
-        User currentUser = userService.findByUsername(principal.getName())
-                        .orElseThrow(() -> new RuntimeException("User not found"));
-        UserDTO currentUserDTO = userConverter.convertToDTO(currentUser);
 
-        // Completed Tasks find
+        List<TodoDTO> todoDTOS = todos.stream()
+                .map(todoConverter::convertToDTO)
+                .toList();
+
+
         Integer completed = todoService.findCompletedCount(currentUser.getUserId());
         Integer totalTodo = todoService.findAllUserTodo(currentUser.getUserId());
 
 
         model.addAttribute("todos", todoDTOS);
-        model.addAttribute("user", currentUserDTO);
+        model.addAttribute("user", userConverter.convertToDTO(currentUser));
         model.addAttribute("completedCount", completed);
         model.addAttribute("totalCount", totalTodo);
-
-
+        model.addAttribute("filter", filter);
 
         return "index";
-
     }
+
 
     @GetMapping("/new")
     public String newTodo(Model model){
@@ -110,6 +113,17 @@ public class TodoController {
 
         todoService.deleteTodo(id);
         return "redirect:/todo";
+
+    }
+
+    @PostMapping("/{id}/edit")
+    public String todoEdit(@PathVariable Long id,
+                           @ModelAttribute TodoDTO todo){
+
+        todoService.editTodo(id, todo);
+
+        return "redirect:/todo";
+
 
     }
 

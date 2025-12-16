@@ -12,257 +12,248 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #e8e8e8;
+            padding: 25px 15px;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 880px;
             margin: 0 auto;
         }
 
         .header {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: #fff;
+            border: 1px solid #bbb;
+            padding: 22px 25px;
+            margin-bottom: 18px;
         }
 
         .header h1 {
-            color: #667eea;
-            margin-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 26px;
         }
 
         .user-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #f0f0f0;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid #ddd;
+        }
+
+        .user-info > div:first-child {
+            margin-bottom: 14px;
         }
 
         .stats {
-            display: flex;
-            gap: 20px;
+            margin-top: 8px;
         }
 
         .stat-item {
-            background: #f8f9fa;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 14px;
+            background: #f5f5f5;
+            padding: 8px 14px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            font-size: 13px;
         }
 
         .stat-number {
             font-weight: bold;
-            color: #667eea;
-            font-size: 18px;
+            color: #2980b9;
+            font-size: 17px;
         }
 
         .add-todo-btn {
-            background: #667eea;
+            background: #3498db;
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
+            padding: 10px 24px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             text-decoration: none;
             display: inline-block;
-            transition: background 0.3s;
         }
 
         .add-todo-btn:hover {
-            background: #5568d3;
+            background: #2980b9;
         }
 
         .logout-btn {
-            background: #dc3545;
+            background: #e74c3c;
             color: white;
             border: none;
-            padding: 8px 20px;
-            border-radius: 8px;
+            padding: 10px 20px;
             cursor: pointer;
             text-decoration: none;
-            transition: background 0.3s;
+            margin-left: 8px;
         }
 
         .logout-btn:hover {
-            background: #c82333;
+            background: #c0392b;
         }
 
         .filters {
+            background: #fff;
+            border: 1px solid #bbb;
+            padding: 16px 20px;
+            margin-bottom: 18px;
+        }
+
+        .filter-buttons a {
+            padding: 7px 18px;
+            border: 1px solid #3498db;
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            color: #3498db;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 8px;
         }
 
-        .filter-buttons {
-            display: flex;
-            gap: 10px;
+        .filter-buttons a.active {
+            background: #3498db;
+            color: white;
         }
 
-        .filter-btn {
-            padding: 8px 20px;
-            border: 2px solid #667eea;
-            background: white;
-            color: #667eea;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
-            background: #667eea;
+        .filter-buttons a:hover {
+            background: #3498db;
             color: white;
         }
 
         .todo-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            margin-top: 0;
         }
 
         .todo-item {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: transform 0.2s;
-        }
-
-        .todo-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border: 1px solid #bbb;
+            padding: 18px 20px;
+            margin-bottom: 12px;
         }
 
         .todo-item.completed {
-            opacity: 0.7;
+            background: #f9f9f9;
         }
 
         .todo-checkbox {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
+            vertical-align: middle;
+            margin-right: 12px;
         }
 
         .todo-content {
-            flex: 1;
+            display: inline-block;
+            width: calc(100% - 220px);
+            vertical-align: middle;
         }
 
         .todo-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
+            color: #222;
+            margin-bottom: 6px;
         }
 
         .todo-item.completed .todo-title {
             text-decoration: line-through;
-            color: #999;
+            color: #888;
         }
 
         .todo-description {
-            color: #666;
+            color: #555;
             font-size: 14px;
-            margin-bottom: 8px;
+            margin-bottom: 9px;
         }
 
         .todo-meta {
-            display: flex;
-            gap: 15px;
-            font-size: 13px;
+            margin-top: 8px;
         }
 
         .priority-badge {
-            padding: 4px 12px;
-            border-radius: 12px;
+            padding: 3px 10px;
             font-weight: 600;
-            font-size: 12px;
+            font-size: 11px;
+            display: inline-block;
+            margin-right: 12px;
         }
 
         .priority-HIGH {
-            background: #ffe5e5;
-            color: #dc3545;
+            background: #ffcccc;
+            color: #c0392b;
+            border: 1px solid #e74c3c;
         }
 
         .priority-MEDIUM {
-            background: #fff3cd;
-            color: #ffc107;
+            background: #fff4cc;
+            color: #d68910;
+            border: 1px solid #f39c12;
         }
 
         .priority-LOW {
             background: #d4edda;
-            color: #28a745;
+            color: #27ae60;
+            border: 1px solid #2ecc71;
         }
 
         .due-date {
-            color: #666;
+            color: #555;
+            font-size: 13px;
         }
 
         .due-date.overdue {
-            color: #dc3545;
+            color: #e74c3c;
             font-weight: bold;
         }
 
         .todo-actions {
-            display: flex;
-            gap: 10px;
+            display: inline-block;
+            float: right;
+            vertical-align: middle;
         }
 
         .btn {
-            padding: 8px 16px;
+            padding: 7px 15px;
             border: none;
-            border-radius: 6px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 13px;
             text-decoration: none;
-            transition: all 0.3s;
+            margin-left: 6px;
         }
 
         .btn-edit {
-            background: #ffc107;
+            background: #f39c12;
             color: white;
         }
 
         .btn-edit:hover {
-            background: #e0a800;
+            background: #d68910;
         }
 
         .btn-delete {
-            background: #dc3545;
+            background: #e74c3c;
             color: white;
         }
 
         .btn-delete:hover {
-            background: #c82333;
+            background: #c0392b;
         }
 
         .empty-state {
             background: white;
-            border-radius: 15px;
-            padding: 60px 20px;
+            border: 1px solid #bbb;
+            padding: 50px 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .empty-state h2 {
-            color: #667eea;
-            margin-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 12px;
         }
 
         .empty-state p {
-            color: #666;
-            margin-bottom: 20px;
+            color: #555;
+            margin-bottom: 18px;
         }
 
         .modal {
@@ -273,52 +264,46 @@
             top: 0;
             width: 100%;
             height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.5);
         }
 
         .modal-content {
             background-color: white;
-            margin: 10vh auto;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-            animation: fadeIn 0.3s;
+            margin: 80px auto;
+            padding: 25px 30px;
+            border: 1px solid #888;
+            width: 85%;
+            max-width: 480px;
         }
 
         .modal-content h3 {
-            color: #667eea;
+            color: #2c3e50;
             margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #ddd;
         }
 
         .close-btn {
-            color: #aaa;
+            color: #888;
             float: right;
-            font-size: 28px;
+            font-size: 26px;
             font-weight: bold;
-            transition: color 0.3s;
         }
 
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #dc3545;
-            text-decoration: none;
+        .close-btn:hover {
+            color: #e74c3c;
             cursor: pointer;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
             font-weight: 600;
-            color: #444;
+            color: #333;
         }
 
         .form-group input[type="text"],
@@ -326,23 +311,21 @@
         .form-group textarea,
         .form-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            padding: 8px 10px;
+            border: 1px solid #bbb;
             font-size: 14px;
-            box-sizing: border-box;
         }
 
-        @keyframes fadeIn {
-            from {opacity: 0; transform: translateY(-20px);}
-            to {opacity: 1; transform: translateY(0);}
+        .form-group textarea {
+            min-height: 70px;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1>📝 My ToDo List</h1>
+        <h1>My ToDo List</h1>
         <div class="user-info">
             <div>
                 <span>Welcome, <strong th:text="${user.username}">User</strong>!</span>
@@ -355,8 +338,8 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex; gap: 10px;">
-                <a href="/todo/new" class="add-todo-btn">+ Add New Todo</a>
+            <div>
+                <a href="/todo/new" class="add-todo-btn">Add New Todo</a>
                 <form th:action="@{/logout}" method="post" style="display: inline;">
                     <button type="submit" class="logout-btn">Logout</button>
                 </form>
@@ -379,17 +362,16 @@
         <div class="empty-state" th:if="${#lists.isEmpty(todos)}">
             <h2>No tasks yet!</h2>
             <p>Create your first todo to get started</p>
-            <a href="/todo/new" class="add-todo-btn">+ Add New Todo</a>
+            <a href="/todo/new" class="add-todo-btn">Add New Todo</a>
         </div>
 
         <div th:each="todo : ${todos}"
              class="todo-item"
              th:classappend="${todo.completed ? 'completed' : ''}">
 
-            <form th:action="@{/todo/{id}/toggle(id=${todo.id})}" method="post" style="display: inline;">
+            <form th:action="@{/todo/{id}/toggle(id=${todo.id})}" method="post" class="toggle-form" style="display: inline;">
                 <input type="checkbox" class="todo-checkbox"
-                       th:checked="${todo.completed}"
-                       onchange="this.form.submit()">
+                       th:checked="${todo.completed}">
             </form>
 
             <div class="todo-content">
@@ -404,7 +386,7 @@
                     </span>
                     <span class="due-date" th:if="${todo.dueDate}">
                          <span th:text="${#temporals.format(todo.dueDate, 'dd MMM yyyy')}">
-                            01 Jan 2024
+                            11
                         </span>
                     </span>
                 </div>
@@ -423,8 +405,7 @@
                 </button>
 
                 <form th:action="@{/todo/{id}/delete(id=${todo.id})}" method="post"
-                      style="display: inline;"
-                      onsubmit="return confirm('Are you sure you want to delete this task?');">
+                      style="display: inline;">
                     <button type="submit" class="btn btn-delete">Delete</button>
                 </form>
             </div>
@@ -449,29 +430,21 @@
                 <textarea id="editDescription" name="description"></textarea>
             </div>
 
-            <div class="form-group" style="display: flex; gap: 20px;">
-                <div style="flex: 1;">
-                    <label for="editPriority">Priority</label>
-                    <select id="editPriority" name="priority">
-                        <option value="LOW">LOW</option>
-                        <option value="MEDIUM">MEDIUM</option>
-                        <option value="HIGH">HIGH</option>
-                    </select>
-                </div>
-                <div style="flex: 1;">
-                    <label for="editDueDate">Due Date</label>
-                    <input type="date" id="editDueDate" name="dueDate">
-                </div>
+            <div class="form-group">
+                <label for="editPriority">Priority</label>
+                <select id="editPriority" name="priority">
+                    <option value="LOW">LOW</option>
+                    <option value="MEDIUM">MEDIUM</option>
+                    <option value="HIGH">HIGH</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label>
-                    <input type="checkbox" id="editCompleted" name="completed">
-                    Completed
-                </label>
+                <label for="editDueDate">Due Date</label>
+                <input type="date" id="editDueDate" name="dueDate">
             </div>
 
-            <button type="submit" class="add-todo-btn" style="width: 100%;">Save Changes</button>
+            <button type="submit" class="add-todo-btn" style="width: 100%; margin-top: 8px;">Save Changes</button>
 
         </form>
     </div>
@@ -485,7 +458,6 @@
     var editDescription = document.getElementById("editDescription");
     var editPriority = document.getElementById("editPriority");
     var editDueDate = document.getElementById("editDueDate");
-    var editCompleted = document.getElementById("editCompleted");
 
     function openEditModal(button) {
         var id = button.getAttribute('data-id');
@@ -493,7 +465,6 @@
         var description = button.getAttribute('data-description');
         var priority = button.getAttribute('data-priority');
         var dueDate = button.getAttribute('data-due-date');
-        var completed = button.getAttribute('data-completed') === 'true';
 
         editTitle.value = title;
         editDescription.value = description && description !== 'null' ? description : '';
@@ -501,7 +472,6 @@
 
         editDueDate.value = dueDate && dueDate !== 'null' ? dueDate : '';
 
-        editCompleted.checked = completed;
 
         editForm.setAttribute('action', '/todo/' + id + '/edit');
 
@@ -517,6 +487,74 @@
             modal.style.display = "none";
         }
     }
+
+    window.addEventListener('load', function() {
+        var items = document.querySelectorAll('.todo-item');
+        var delay = 0;
+        for(var i = 0; i < items.length; i++) {
+            items[i].style.opacity = '0';
+            items[i].style.marginLeft = '-20px';
+            (function(item, delayTime) {
+                setTimeout(function() {
+                    item.style.transition = 'opacity 0.4s, margin-left 0.4s';
+                    item.style.opacity = '1';
+                    item.style.marginLeft = '0';
+                }, delayTime);
+            })(items[i], delay);
+            delay += 100;
+        }
+    });
+
+    var buttons = document.querySelectorAll('.btn, .add-todo-btn, .logout-btn, .filter-buttons a');
+    for(var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.05)';
+            this.style.transition = 'transform 0.2s';
+        });
+        buttons[i].addEventListener('mouseleave', function() {
+            this.style.transform = 'scale(1)';
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.toggle-form').forEach(form => {
+            const checkbox = form.querySelector('.todo-checkbox');
+            const todoItem = form.closest('.todo-item');
+
+            if (checkbox && todoItem) {
+                checkbox.addEventListener('change', async (event) => {
+                    event.preventDefault();
+
+                    const isCheckedBeforeRequest = event.target.checked;
+                    const url = form.action;
+
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                        });
+
+                        if (response.ok || response.status === 204) {
+                            if (isCheckedBeforeRequest) {
+                                todoItem.classList.add('completed');
+                            } else {
+                                todoItem.classList.remove('completed');
+                            }
+
+                            event.target.checked = isCheckedBeforeRequest;
+
+                        } else {
+                            console.error('Ошибка переключения задачи:', response.status);
+                            event.target.checked = !isCheckedBeforeRequest;
+                        }
+
+                    } catch (error) {
+                        console.error('Сетевая ошибка:', error);
+                        event.target.checked = !isCheckedBeforeRequest;
+                    }
+                });
+            }
+        });
+    });
 </script>
 
 </body>

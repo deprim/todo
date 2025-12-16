@@ -4,203 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ToDo App</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .login-container {
-            background: white;
-            border-radius: 15px;
-            padding: 50px 40px;
-            max-width: 450px;
-            width: 100%;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .login-header h1 {
-            color: #667eea;
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .login-header p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-            font-size: 14px;
-        }
-
-        input[type="text"],
-        input[type="password"],
-        input[type="email"] {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .error-message {
-            background: #ffe5e5;
-            color: #dc3545;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            border-left: 4px solid #dc3545;
-        }
-
-        .success-message {
-            background: #d4edda;
-            color: #28a745;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            border-left: 4px solid #28a745;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #5568d3;
-        }
-
-        .divider {
-            text-align: center;
-            margin: 25px 0;
-            color: #999;
-            font-size: 14px;
-            position: relative;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 45%;
-            height: 1px;
-            background: #e0e0e0;
-        }
-
-        .divider::before {
-            left: 0;
-        }
-
-        .divider::after {
-            right: 0;
-        }
-
-        .register-link {
-            text-align: center;
-            margin-top: 20px;
-            color: #666;
-            font-size: 14px;
-        }
-
-        .register-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .register-link a:hover {
-            text-decoration: underline;
-        }
-
-        .password-toggle {
-            position: relative;
-        }
-
-        .password-toggle input {
-            padding-right: 45px;
-        }
-
-        .toggle-btn {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #999;
-            font-size: 14px;
-            padding: 5px;
-        }
-
-        .toggle-btn:hover {
-            color: #667eea;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/login.css}">
 </head>
 <body>
 <div class="login-container">
     <div class="login-header">
-        <h1>📝 ToDo App</h1>
+        <h1>ToDo App</h1>
         <p>Sign in to manage your tasks</p>
     </div>
 
-    <!-- Error Message -->
     <div class="error-message" th:if="${error}">
         <span th:text="${error}">Invalid username or password</span>
     </div>
 
-    <!-- Success Message -->
     <div class="success-message" th:if="${message}">
         <span th:text="${message}">Registration successful!</span>
     </div>
 
-    <!-- Login Form -->
     <form th:action="@{/process_login}" method="post">
         <div class="form-group">
             <label for="username">Username or Email</label>
@@ -221,7 +41,8 @@
                        placeholder="Enter your password"
                        required>
                 <button type="button"
-                        class="toggle-btn">Show</button>
+                        class="toggle-btn"
+                        onclick="togglePassword()">Show</button>
             </div>
         </div>
 
@@ -235,6 +56,8 @@
         <a href="/register">Create one now</a>
     </div>
 </div>
+
+<script th:src="@{/js/login.js}"></script>
 
 </body>
 </html>
