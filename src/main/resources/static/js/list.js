@@ -90,12 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         event.target.checked = isCheckedBeforeRequest;
 
                     } else {
-                        console.error('Ошибка переключения задачи:', response.status);
+                        console.error('Error:', response.status);
                         event.target.checked = !isCheckedBeforeRequest;
                     }
 
                 } catch (error) {
-                    console.error('Сетевая ошибка:', error);
+                    console.error('Network error:', error);
                     event.target.checked = !isCheckedBeforeRequest;
                 }
             });
