@@ -1,0 +1,550 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8e8e8;
+    min-height: 100vh;
+    padding: 25px 15px;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.modal .form-group {
+    margin-bottom: 16px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.required {
+    color: #e74c3c;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: 9px 11px;
+    border: 1px solid #bbb;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content textarea,
+.modal-content select {
+    padding: 8px 10px;
+    font-size: 14px;
+}
+
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+.form-row {
+    display: block;
+}
+
+.form-row .form-group {
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+}
+
+.form-row .form-group:first-child {
+    margin-right: 3%;
+}
+
+.form-actions {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 1px solid #ddd;
+}
+
+.help-text {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.checkbox-label {
+    cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.btn {
+    padding: 10px 22px;
+    border: none;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.todo-actions .btn {
+    padding: 7px 15px;
+    font-size: 13px;
+    margin-left: 6px;
+}
+
+.add-todo-btn {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.add-todo-btn:hover {
+    background: #2980b9;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+    margin-left: 8px;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: #ddd;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #ccc;
+}
+
+.btn-edit {
+    background: #f39c12;
+    color: white;
+}
+.btn-edit:hover {
+    background: #d68910;
+}
+.btn-delete {
+    background: #e74c3c;
+    color: white;
+}
+.btn-delete:hover {
+    background: #c0392b;
+}
+.logout-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-left: 8px;
+}
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+
+.container {
+    max-width: 880px;
+    margin: 0 auto;
+}
+
+.header {
+    background: #fff;
+    border: 1px solid #bbb;
+    padding: 22px 25px;
+    margin-bottom: 18px;
+}
+
+.header h1 {
+    color: #2c3e50;
+    margin-bottom: 12px;
+    font-size: 26px;
+}
+
+.user-info {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #ddd;
+}
+
+.user-info > div:first-child {
+    margin-bottom: 14px;
+}
+
+.stats {
+    margin-top: 8px;
+}
+
+.stat-item {
+    background: #f5f5f5;
+    padding: 8px 14px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    font-size: 13px;
+}
+
+.stat-number {
+    font-weight: bold;
+    color: #2980b9;
+    font-size: 17px;
+}
+
+.filters {
+    background: #fff;
+    border: 1px solid #bbb;
+    padding: 16px 20px;
+    margin-bottom: 18px;
+}
+
+.filter-buttons a {
+    padding: 7px 18px;
+    border: 1px solid #3498db;
+    background: white;
+    color: #3498db;
+    text-decoration: none;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.filter-buttons a.active {
+    background: #3498db;
+    color: white;
+}
+
+.filter-buttons a:hover {
+    background: #3498db;
+    color: white;
+}
+
+.todo-list {
+    margin-top: 0;
+}
+
+.todo-item {
+    background: white;
+    border: 1px solid #bbb;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+}
+
+.todo-item.completed {
+    background: #f9f9f9;
+}
+
+.todo-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-right: 12px;
+}
+
+.todo-content {
+    display: inline-block;
+    width: calc(100% - 220px);
+    vertical-align: middle;
+}
+
+.todo-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 6px;
+}
+
+.todo-item.completed .todo-title {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-description {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 9px;
+}
+
+.todo-meta {
+    margin-top: 8px;
+}
+
+.priority-badge {
+    padding: 3px 10px;
+    font-weight: 600;
+    font-size: 11px;
+    display: inline-block;
+    margin-right: 12px;
+}
+
+.priority-HIGH {
+    background: #ffcccc;
+    color: #c0392b;
+    border: 1px solid #e74c3c;
+}
+
+.priority-MEDIUM {
+    background: #fff4cc;
+    color: #d68910;
+    border: 1px solid #f39c12;
+}
+
+.priority-LOW {
+    background: #d4edda;
+    color: #27ae60;
+    border: 1px solid #2ecc71;
+}
+
+.due-date {
+    color: #555;
+    font-size: 13px;
+}
+
+.due-date.overdue {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.todo-actions {
+    display: inline-block;
+    float: right;
+    vertical-align: middle;
+}
+
+.empty-state {
+    background: white;
+    border: 1px solid #bbb;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.empty-state h2 {
+    color: #2c3e50;
+    margin-bottom: 12px;
+}
+
+.empty-state p {
+    color: #555;
+    margin-bottom: 18px;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 80px auto;
+    padding: 25px 30px;
+    border: 1px solid #888;
+    width: 85%;
+    max-width: 480px;
+}
+
+.modal-content h3 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.close-btn {
+    color: #888;
+    float: right;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.close-btn:hover {
+    color: #e74c3c;
+    cursor: pointer;
+}
+
+
+.form-container {
+    background: white;
+    border: 1px solid #bbb;
+    padding: 35px;
+    max-width: 580px;
+    margin: 0 auto;
+}
+
+.form-header {
+    margin-bottom: 28px;
+}
+
+.form-header h1 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 24px;
+}
+
+.back-link {
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-link:hover {
+    color: #3498db;
+}
+
+
+.login-container {
+    background: white;
+    border: 1px solid #bbb;
+    padding: 45px 35px;
+    max-width: 420px;
+    margin: 60px auto 0;
+}
+
+.login-header {
+    margin-bottom: 35px;
+}
+
+.login-header h1 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: #555;
+    font-size: 14px;
+}
+
+.error-message {
+    background: #ffcccc;
+    color: #c0392b;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    border-left: 3px solid #e74c3c;
+}
+
+.success-message {
+    background: #d4edda;
+    color: #27ae60;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    border-left: 3px solid #2ecc71;
+}
+
+.login-container .btn {
+    width: 100%;
+    padding: 11px;
+    margin-left: 0;
+}
+
+.divider {
+    text-align: center;
+    margin: 22px 0;
+    color: #888;
+    font-size: 13px;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 43%;
+    height: 1px;
+    background: #ccc;
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 18px;
+    color: #555;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.password-toggle {
+    position: relative;
+}
+
+.password-toggle input {
+    padding-right: 50px;
+}
+
+.toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #888;
+    font-size: 13px;
+    padding: 4px 8px;
+}
+
+.toggle-btn:hover {
+    color: #3498db;
+}

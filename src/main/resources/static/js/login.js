@@ -1,16 +1,3 @@
-function togglePassword() {
-    var passwordInput = document.getElementById('password');
-    var toggleBtn = document.querySelector('.toggle-btn');
-
-    if(passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleBtn.textContent = 'Hide';
-    } else {
-        passwordInput.type = 'password';
-        toggleBtn.textContent = 'Show';
-    }
-}
-
 window.addEventListener('load', function() {
     var container = document.querySelector('.login-container');
     container.style.opacity = '0';

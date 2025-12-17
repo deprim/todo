@@ -20,22 +20,28 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/css/**",
+                                "/js/**",
+                                "/images/**",
+                                "/webjars/**",
+                                "/login",
+                                "/register/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/todo", true)
-                        .permitAll())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-                        .requestMatchers("/login", "/process_login").permitAll()
-                        .anyRequest().authenticated())
+                        .permitAll()
+                )
                 .csrf(csrf -> csrf.disable());
 
         return http.build();
-
-
-
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

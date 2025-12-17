@@ -6,6 +6,8 @@ public class UserDTO {
 
     private String username;
     private String email;
+    private String password;
+
 
 
     public String getUsername() {
@@ -24,6 +26,12 @@ public class UserDTO {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

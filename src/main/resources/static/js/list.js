@@ -90,12 +90,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         event.target.checked = isCheckedBeforeRequest;
 
                     } else {
-                        console.error('Error:', response.status);
+                        console.error('Err', response.status);
                         event.target.checked = !isCheckedBeforeRequest;
                     }
 
                 } catch (error) {
-                    console.error('Network error:', error);
+                    console.error('Err', error);
                     event.target.checked = !isCheckedBeforeRequest;
                 }
             });
